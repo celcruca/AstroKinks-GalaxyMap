@@ -1,0 +1,515 @@
+﻿/* =============================================================================
+ * Project : アストロキングス - 蠱毒な銀河へようこそ！
+ * File    : styles.css
+ * Version : Ver. 0.02 / Rev. 015
+ * Date    : 2025-10-08 (水)
+ * Library : -
+ * Function: UI固定帯およびキャンバス領域のレイアウト定義
+ * Notes   :
+ *   - ★本改修: 右上メニューがルーラーに重ならないよう上マージンを調整。
+ * =============================================================================
+ */
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0f16;
+  color: #d9e1ea;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+}
+
+#app-shell {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #0b0f16;
+}
+
+#app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+}
+
+#top-panel {
+  position: absolute;
+  top: 56px;
+  right: 16px;
+  width: 280px;
+  background: rgba(12, 18, 28, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  backdrop-filter: saturate(1.2) blur(5px);
+  color: #e9f3ff;
+  z-index: 50;
+}
+
+#debug-panel {
+  position: absolute;
+  bottom: 92px;
+  right: 16px;
+  width: 240px;
+  background: rgba(12, 18, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+  backdrop-filter: saturate(1.2) blur(6px);
+  color: #f0f6ff;
+  z-index: 45;
+}
+
+#debug-panel h2 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+#debug-panel .debug-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.debug-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.debug-field .debug-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d9e6ff;
+}
+
+.debug-field input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(8, 14, 22, 0.9);
+  color: #f5fbff;
+  font-size: 13px;
+}
+
+.debug-field .debug-value {
+  align-self: flex-end;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+
+#title-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+#face {
+  font-size: 20px;
+  line-height: 1;
+}
+
+#menu-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+#menu-title .line1,
+#menu-title .line2 {
+  display: block;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.row:last-child {
+  margin-bottom: 0;
+}
+.menu-section {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.menu-heading {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #f2f8ff;
+}
+.menu-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.menu-heading-row.spaced {
+  margin-bottom: 12px;
+}
+.menu-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(24, 38, 58, 0.85);
+  color: #f8fbff;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.menu-toggle:hover {
+  background: rgba(40, 64, 98, 0.9);
+}
+.menu-toggle:active {
+  transform: translateY(1px);
+}
+
+#ballisticSection.collapsed .ballistic-content {
+  display: none;
+}
+
+#ballisticSection.collapsed .menu-toggle {
+  transform: rotate(-180deg);
+}
+
+.ballistic-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ballistic-field,
+.ballistic-metric,
+.ballistic-action,
+.ballistic-toggles,
+.ballistic-impact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ballistic-field .ballistic-title,
+.ballistic-metric .ballistic-title,
+.ballistic-toggles .ballistic-title,
+.ballistic-impact .ballistic-title {
+  display: inline-flex;
+  align-items: center;
+  min-width: 72px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #d9e6ff;
+}
+
+.ballistic-field .ballistic-input {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.ballistic-impact-input {
+  flex: 0 0 132px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+.impact-button {
+  min-width: 110px;
+}
+
+.ballistic-button {
+  flex: 0 0 auto;
+  min-width: 96px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(24, 38, 58, 0.9);
+  color: #f5f9ff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ballistic-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: rgba(24, 38, 58, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: none;
+  pointer-events: none;
+}
+
+.ballistic-button:disabled:hover {
+  background: rgba(24, 38, 58, 0.5);
+  transform: none;
+}
+
+.rally-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 15, 22, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 1200;
+  padding: 24px;
+}
+
+.rally-popup.is-visible {
+  display: flex;
+}
+
+.rally-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  min-width: 240px;
+  padding: 24px 28px;
+  border-radius: 14px;
+  background: rgba(16, 22, 32, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+.rally-popup-text {
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  color: #edf5ff;
+}
+
+.rally-popup-text + .rally-popup-text {
+  margin-top: -6px;
+}
+
+.rally-popup-label {
+  font-weight: 600;
+  color: #f3fbff;
+}
+
+.rally-popup-timer {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 32px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  color: #ffe38a;
+}
+
+.rally-popup-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.rally-popup-close {
+  min-width: 120px;
+}
+
+.ballistic-button:hover {
+  background: rgba(40, 64, 98, 0.95);
+}
+
+.ballistic-button:active {
+  transform: translateY(1px);
+}
+
+.ballistic-value {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(12, 18, 28, 0.85);
+  color: #f2f8ff;
+  font-size: 13px;
+  min-width: 120px;
+}
+
+
+
+.ballistic-toggle-group {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.toggle-button.active {
+  background: rgba(73, 168, 255, 0.35);
+  border-color: rgba(73, 168, 255, 0.45);
+  color: #e4f3ff;
+}
+
+.toggle-button:active {
+  transform: translateY(1px);
+}
+.menu-row {
+  align-items: center;
+}
+.menu-label {
+  flex: 0 0 auto;
+  min-width: 64px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #d9e6ff;
+}
+.btn-compact {
+  flex: 0 0 auto;
+  padding-inline: 12px;
+}
+.btn {
+  flex: 1 1 auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(24, 38, 58, 0.9);
+  color: #e7f1ff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background: rgba(40, 64, 98, 0.95);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.ghost {
+  flex: 0 0 auto;
+  min-width: 96px;
+}
+#distanceHeading + .menu-row {
+  margin-top: 6px;
+}
+.menu-section .row {
+  margin-bottom: 8px;
+}
+.menu-section .row:last-child {
+  margin-bottom: 0;
+}
+#kw {
+  flex: 1 1 auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(12, 18, 28, 0.85);
+  color: #f2f8ff;
+  font-size: 13px;
+  outline: none;
+}
+.menu-input {
+  flex: 1 1 50%;
+  min-width: 0;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(12, 18, 28, 0.85);
+  color: #f2f8ff;
+  font-size: 13px;
+  outline: none;
+}
+
+.menu-inline-label {
+.readout {
+  flex: 0 0 auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(12, 18, 28, 0.75);
+  color: #f2f8ff;
+  font-size: 13px;
+  line-height: 1.4;
+  min-height: 36px;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+  flex: 0 0 auto;
+  margin-left: 12px;
+  color: #e7f1ff;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.readout.error {
+  border-color: rgba(255, 92, 92, 0.65);
+  color: #ffb3b3;
+}
+
+#status,
+#credit {
+  position: absolute;
+  color: #bcd8ff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+  font-size: 13px;
+  line-height: 1.4;
+  z-index: 40;
+}
+
+#status {
+  left: 72px;
+  bottom: 14px;
+}
+
+#credit {
+  right: 16px;
+  bottom: 14px;
+}
+
+#cursor {
+  position: absolute;
+  display: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(12, 18, 28, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 60;
+}
+#debug-panel {
+  display: none !important;
+}
+
+
+
+
